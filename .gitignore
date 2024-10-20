@@ -8,5 +8,5 @@ node_modules/
 .github/
 cloudinary_python.txt
 kaggle.json
-inputs/brain-tumor-mri-dataset/Testing/
-inputs/brain-tumor-mri-dataset/Training/
+inputs/brain-tumor-mri-dataset/mri-images/test
+inputs/brain-tumor-mri-dataset/mri-images/train
