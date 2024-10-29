@@ -14,5 +14,6 @@ scikit-learn==1.5.2
 seaborn==0.13.2
 setuptools==75.2.0
 streamlit==1.39.0
+tensorflow==2.17.0
 Werkzeug==3.0.4
 wheel==0.44.0
