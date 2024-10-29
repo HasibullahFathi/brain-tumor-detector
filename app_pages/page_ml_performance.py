@@ -6,6 +6,13 @@ from src.machine_learning.evaluate_clf import load_test_evaluation
 
 
 def page_ml_performance_metrics():
+    """
+    Renders the Machine Learning Performance Metrics page in the Streamlit app.
+    
+    This function displays the frequency distribution of labels in the train, 
+    validation, and test sets, model training history (accuracy and losses), 
+    evaluation results on the test set, confusion matrix, and model visualization.
+    """
     version = 'v1'
 
     st.write("### Train, Validation and Test Set: Labels Frequencies")

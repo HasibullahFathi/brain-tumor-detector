@@ -5,12 +5,19 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.image import imread
-
 import itertools
 import random
 
 
 def page_brain_tumor_visualizer_body():
+    """
+    Renders the Brain Tumor Visualizer page in the Streamlit app.
+    
+    This function includes options for:
+    - Displaying average and variability images for each tumor type.
+    - Comparing 'No Tumor' images against each tumor type.
+    - Creating a montage of images for a selected tumor type.
+    """
     st.write("### Brain Tumor Visualizer")
     st.info(
         f"* The client is interested in having a study that visually "
@@ -69,6 +76,16 @@ def page_brain_tumor_visualizer_body():
 
 
 def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
+    """
+    Creates an image montage for the specified label from the directory.
+
+    Args:
+        dir_path (str): Path to the directory containing images.
+        label_to_display (str): The label for which to create the montage.
+        nrows (int): Number of rows in the montage.
+        ncols (int): Number of columns in the montage.
+        figsize (tuple): Size of the figure to be displayed.
+    """
     sns.set_style("white")
     labels = os.listdir(dir_path)
 

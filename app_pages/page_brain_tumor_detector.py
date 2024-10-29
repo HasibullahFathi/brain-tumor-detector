@@ -11,6 +11,14 @@ from src.machine_learning.predictive_analysis import (
                                                     )
 
 def page_brain_tumor_detector_body():
+    """
+    Renders the Brain Tumor Detector page in the Streamlit app.
+    
+    This function allows users to upload brain MRI images and receive 
+    predictions on whether they exhibit signs of Glioma, Meningioma, or 
+    Pituitary tumors. It also provides a link to download a dataset 
+    of classified images for further analysis.
+    """
     st.info(
         f"* The client is interested in conducting a study to visually differentiate" 
         f" between a normal brain and one with Glioma, Meningioma, or Pituitary tumors."
