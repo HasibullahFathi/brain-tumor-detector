@@ -1,0 +1,8 @@
+outputs/v1/*
+outputs/v2/*
+outputs/v3/*
+jupyter_notebooks/*
+inputs/brain-tumor-mri-dataset/mri-images/validation/glioma/*
+inputs/brain-tumor-mri-dataset/mri-images/validation/meningioma/*
+inputs/brain-tumor-mri-dataset/mri-images/validation/notumor/*
+inputs/brain-tumor-mri-dataset/mri-images/validation/pituitary/*
