@@ -24,7 +24,7 @@ def page_summary_body():
         f"**Project Dataset**\n\n"
 
         f"The dataset used in this project contains a total of 7023 MRI images across four categories: Glioma, Meningioma, Pituitary tumor, and No Tumor (normal brain scans)." 
-        f"This dataset has been organized for training and testing purposes and provides a comprehensive base for building a machine learning model capable of differentiating between these conditions. "
+        f"This dataset has been organized for training, testing and validation purposes and provides a comprehensive base for building a machine learning model capable of differentiating between these conditions. "
         f"Each MRI image represents a slice of the brain in grayscale format, capturing variations in structure and tissue density associated with each tumor type, which can be instrumental in automated detection and classification."
     )
 

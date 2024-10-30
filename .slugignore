@@ -1,4 +1,6 @@
 outputs/v2/*
 outputs/v3/*
 jupyter_notebooks/*
+.venv/
+tests/
 inputs/brain-tumor-mri-dataset/mri-images/validation/*
