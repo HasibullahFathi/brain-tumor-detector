@@ -1,6 +1,11 @@
+# Ignore all model versions to prevent large files from being pushed
 outputs/v2/*
 outputs/v3/*
+# Ignore Jupyter notebooks
 jupyter_notebooks/*
+# Ignore virtual environment files
 .venv/
+# Ignore test files
 tests/
+# Ignore validation images
 inputs/brain-tumor-mri-dataset/mri-images/validation/*
