@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
-from tensorflow.keras.models import load_model
+from tensorflow import keras
 from PIL import Image
 from src.data_management import load_pkl_file
 
@@ -68,7 +68,8 @@ def load_model_and_predict(my_image, version):
     """
     
     # Load the model
-    model = load_model(f"outputs/{version}/brain_tumor_detector.keras")
+    model = keras.models.load_model(f"outputs/{version}/brain_tumor_detector.keras")
+
 
     # Predict probabilities for each class
     pred_proba = model.predict(my_image)[0]  # Model outputs an array of probabilities
