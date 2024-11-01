@@ -68,7 +68,7 @@ def load_model_and_predict(my_image, version):
     """
     
     # Load the model
-    model = keras.models.load_model(f"outputs/v1/brain_tumor_detector.keras")
+    model = keras.models.load_model(f"outputs/{version}/brain_tumor_detector.h5")
 
 
     # Predict probabilities for each class
