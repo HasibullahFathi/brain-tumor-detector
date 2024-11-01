@@ -3,5 +3,3 @@ outputs/v2/*
 outputs/v3/*
 # Ignore Jupyter notebooks
 jupyter_notebooks/*
-# Ignore validation images
-# inputs/brain-tumor-mri-dataset/mri-images/validation/*

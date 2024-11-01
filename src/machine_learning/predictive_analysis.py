@@ -41,7 +41,7 @@ def resize_input_image(img, version):
     """
     Reshape image to average image size and add color channels.
     """
-    image_shape = load_pkl_file(file_path=f"outputs/{version}/image_shape.pkl")
+    image_shape = load_pkl_file(file_path=f"outputs/v1/image_shape.pkl")
     img_resized = img.resize((image_shape[1], image_shape[0]), Image.LANCZOS)
 
     # Convert to RGB if not already (ensures 3 channels)
@@ -68,7 +68,7 @@ def load_model_and_predict(my_image, version):
     """
     
     # Load the model
-    model = keras.models.load_model(f"outputs/{version}/brain_tumor_detector.keras")
+    model = keras.models.load_model(f"outputs/v1/brain_tumor_detector.keras")
 
 
     # Predict probabilities for each class
