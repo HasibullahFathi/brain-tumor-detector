@@ -3,3 +3,4 @@ outputs/v2/*
 outputs/v3/*
 # Ignore Jupyter notebooks
 jupyter_notebooks/*
+assets/*
