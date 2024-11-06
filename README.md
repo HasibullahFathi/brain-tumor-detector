@@ -8,11 +8,71 @@ The Brain Tumor Detector is a predictive analytics tool designed to help healthc
 
 ---
 
-## About the Dataset
+## Table of Contents
+
+Here's a table of contents for your project documentation:
+
+---
+
+# Table of Contents
+
+2. [Dataset Information](#dataset-information)
+   - [About the Dataset](#about-the-dataset)
+   - [Dataset Description](#dataset-description)
+
+3. [Business Requirements](#business-requirements)
+   - [Key Stakeholders](#key-stakeholders)
+   - [Business Objectives Summary](#business-objectives-summary)
+   - [Hypotheses and Validation](#hypotheses-and-validation)
+
+4. [Mapping Business Requirements to Data Visualizations and Machine Learning Tasks](#mapping-business-requirements-to-data-visualizations-and-machine-learning-tasks)
+   - [Data Visualization](#business-requirement-1-data-visualization)
+   - [Classification](#business-requirement-2-classification)
+   - [ML Business Case](#ml-business-case)
+
+5. [Model Development](#model-development)
+   - [Model Overview - Version 1](#model-development-overview-version-1)
+   - [Model Architecture](#model-architecture)
+   - [Compilation](#compilation)
+   - [Model Overview - Version 2 (VGG16 Transfer Learning)](#model-development-overview-version-2-transfer-learning-with-vgg16)
+   - [Model Overview - Version 3 (Fine-Tuned VGG16)](#model-development-overview-version-3-fine-tuned-transfer-learning-with-vgg16)
+   - [Summary of Model Development](#summary-of-model-development-journey)
+
+6. [Dashboard Design Overview](#dashboard-design-overview)
+   - [Quick Project Summary](#quick-project-summary)
+   - [MRI Visualizer](#mri-visualizer)
+   - [Brain Tumor Detection](#brain-tumor-detection)
+   - [Project Hypothesis](#project-hypothesis)
+   - [ML Performance Metrics](#ml-performance-metrics)
+
+7. [Bugs and Issues](#bugs-and-issues)
+   - [Unfixed Bugs](#unfixed-bugs)
+   - [Known Issues and Solutions](#issues)
+   - [Testing](#testing)
+
+8. [Deployment Instructions](#deployment-to-heroku)
+   - [Heroku Deployment](#deployment-to-heroku)
+   - [Forking the Repository](#forking-the-repository)
+   - [Cloning the Repository](#cloning-the-repository)
+
+9. [Environment and Libraries](#data-analysis-and-machine-learning-libraries)
+   - [Machine Learning and Data Analysis Libraries](#data-analysis-and-machine-learning-libraries)
+   - [Additional Libraries](#additional-libraries)
+   - [Environment Management](#environment-management)
+
+10. [Credits](#credits)
+    - [Content Sources](#content)
+    - [Acknowledgements](#acknowledgements)
+
+---
+
+# Dataset Information
+
+### About the Dataset
 
 This dataset is a compilation derived from three key sources: Figshare, Br35H, and a third source, which was later excluded due to data quality concerns.
 
-## Dataset Description
+### Dataset Description
 The dataset comprises 7,023 MRI images of human brains, organized into four distinct classes, with a focus on brain tumors and their classification. These classes are:
 
 **Glioma**: Cancerous tumors originating in glial cells, potentially aggressive and difficult to treat.
@@ -31,9 +91,11 @@ The "No Tumor" class images were specifically sourced from the Br35H dataset.
 
 For access to the dataset and further information, [visit the Brain Tumor Dataset on Kaggle.](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset)
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
-## Business Requirements
+# Business Requirements
 
 The main goal of this project is to develop a machine learning model that accurately detects and classifies brain tumors from MRI images, specifically distinguishing between Glioma, Meningioma, Pituitary tumors, and normal (tumor-free) brain scans. This model aims to support medical professionals in making timely and accurate diagnoses, offering patients the benefit of early detection and improved treatment planning.
 
@@ -44,7 +106,7 @@ The main goal of this project is to develop a machine learning model that accura
 - **Patients**: Beneficiaries of early detection and effective treatment strategies
 - **Healthcare Providers**: Hospitals and clinics invested in innovative diagnostic tools
 
-**Business Objectives Summary:**
+### Business Objectives Summary
 
 1. **Visual Analysis**: The client is interested in a visual comparison of MRI scans of healthy brains versus those with tumors. This analysis should include average image characteristics and variability within each of the four tumor classes in the dataset.
 
@@ -52,23 +114,39 @@ The main goal of this project is to develop a machine learning model that accura
 
 3. **Interactive Dashboard**: A Streamlit dashboard will be developed as a platform to present the analysis results and predictions. The dashboard will also provide an interface for users to upload new MRI scans for real-time tumor classification.
 
-**Hypotheses and Validation**
+### Hypotheses and Validation
 
 The initial hypotheses for each business objective are outlined as follows:
 
-1. **Visual Differentiation Hypothesis**: There is a strong belief that brain MRI scans of healthy brains versus those with tumors exhibit distinct visual differences. By processing these scans at a consistent resolution and applying appropriate filtering, we should be able to detect differences in shading or patterns that can visually distinguish healthy brain scans from those with Glioma, Meningioma, or Pituitary tumors. A comparative analysis of the average scans per class (healthy vs. each tumor type) should reveal these contrasts.
-
-2. **Classification Model Hypothesis**: A deep learning model based on convolutional neural networks (CNNs) should be capable of accurately classifying brain MRI images into the four categories: Glioma, Meningioma, Pituitary tumor, or normal. Data augmentation techniques should improve the model’s ability to generalize across varied images and help reduce overfitting, enhancing accuracy on unseen data.
-
-   - **Validation**: This hypothesis will be validated through model performance metrics and visualizations. Specifically:
-     - **Training and Validation Curves**: Accuracy and loss curves across epochs should show improvements over time without significant overfitting.
-     - **Confusion Matrix**: A confusion matrix for the test set will provide insights into the model’s accuracy for each class, showing how well it distinguishes among the four categories.
-     - **Performance Metrics**: Key metrics such as accuracy, precision, recall, and F1-score will be calculated to validate the model’s effectiveness in classifying MRI images.
-
-Upon validating these hypotheses, the client should be able to use the visual data analysis techniques and the trained CNN model from this project to reliably differentiate the presence or absence of specific tumor types in brain MRI scans, providing accurate results to support medical diagnosis.
+#### Hypothesis 1: **Visual Differentiation Hypothesis**
+> **Hypothesis:** MRI scans of healthy brains and those affected by different tumor types (Glioma, Meningioma, Pituitary) exhibit unique visual patterns distinguishable by machine learning models.
+> 
+> **Validation:** Successfully validated through the model’s performance in test accuracy (96.31%) and low test loss (0.11078). Additionally, confusion matrix analysis confirmed that each class demonstrated distinct, recognizable visual features, leading to high classification accuracy across the four categories.
 
 ---
-## **Mapping Business Requirements to Data Visualizations and Machine Learning Tasks**
+
+#### Hypothesis 2: **Data Augmentation Hypothesis**
+> **Hypothesis:** Data augmentation techniques, such as rotation, flipping, and brightness adjustment, would improve the model's generalization and help mitigate overfitting by providing diverse examples of MRI images.
+>
+> **Validation:** This hypothesis was validated as the data augmentation contributed significantly to the model's stable and high performance. The test accuracy of 96.31% without signs of overfitting in the accuracy and loss curves indicates effective generalization, supporting the utility of augmentation in enhancing model robustness.
+
+---
+
+#### Hypothesis 3: **Multi-class Classification Hypothesis**
+> **Hypothesis:** A deep learning model, specifically one using a Convolutional Neural Network (CNN) architecture, can accurately classify MRI brain scans into four categories (Glioma, Meningioma, Pituitary tumor, and No Tumor) based on distinctive features of each type.
+>
+> **Validation:** Fully validated by the model’s high test accuracy (96.31%), indicating strong classification capabilities. Performance metrics like precision, recall, and F1-score for each class were within acceptable ranges, confirming the model's ability to reliably differentiate among the four categories in real-world MRI scan analyses.
+
+**Model performance and potential improvements:**
+
+The brain tumor classification model achieved strong results with a test accuracy of 96.31% and a test loss of 0.11078, but it did not reach 100% accuracy. The model's performance was limited by the diversity and quantity of the dataset, as well as variations in real-world MRI scans that differ from the dataset's structure. Improvements could come from increasing the dataset size to capture more variability, adding MRI images from different views (such as sagittal and coronal views), and further tuning hyperparameters. Training for additional epochs with robust data augmentation may also enhance generalization to new, unseen MRI scans.
+
+
+[Back to top ⇧](#table-of-contents)
+
+---
+
+# Mapping Business Requirements to Data Visualizations and Machine Learning Tasks
 
 **Accuracy**: 
 To ensure model accuracy, visualizations will display performance metrics in a way that makes them accessible to all users. By plotting training and validation learning curves, we can monitor progress across epochs, and a confusion matrix will provide a detailed view of how well the model differentiates between the four classes: Glioma, Meningioma, Pituitary tumor, and healthy brain.
@@ -86,6 +164,8 @@ Monitoring model inference time, displayed in visualizations, will help us confi
 Ensuring patient privacy is a priority, handled through data anonymization practices during data handling and deployment. These practices are integrated into the data pipeline to meet compliance standards, securing sensitive data from end to end.
 
 ### Business Requirement 1: Data Visualization
+
+Project [User Stories](https://github.com/users/HasibullahFathi/projects/7/views/1)
 
 - **Navigation and Dashboard**: 
     - *User Story*: As a client, I can easily navigate an interactive dashboard to view and understand the data.
@@ -109,7 +189,7 @@ Ensuring patient privacy is a priority, handled through data anonymization pract
     - *User Story*: As a client, I can save model predictions in a timestamped CSV file, creating a documented history of predictions.
     - *Solution*: Each prediction, including the timestamp, image name, and prediction results, will be saved to a CSV file for record-keeping, providing a reliable history of past analyses and predictions.
 
-**ML Business Case**
+## ML Business Case
 
 The client aims to develop a machine learning solution capable of accurately identifying brain tumors from MRI images. This objective will be achieved by building a robust TensorFlow deep learning pipeline trained on a dataset that categorizes brain images into four classes: Glioma, Meningioma, Pituitary tumors, and normal brain (no tumor). Leveraging convolutional neural networks (CNNs), known for their effectiveness in image recognition, the model will identify unique patterns associated with each class.
 
@@ -119,15 +199,17 @@ The success of this model will hinge on high accuracy and recall rates, measured
 
 Ultimately, this model aims to support accurate and early tumor diagnoses, improving patient outcomes and optimizing healthcare resource allocation.
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
-## Models
+# Model Development
 
 ### Model Development Overview version 1
 
 This brain tumor classification model is a Convolutional Neural Network (CNN) built using Keras, optimized for multi-class classification. It has been designed to identify four classes of brain MRI images: *Glioma*, *Meningioma*, *Pituitary tumors*, and *No Tumor*. Here is a breakdown of its architecture and features:
 
-#### Model Architecture
+### Model Architecture
 
 The CNN model consists of the following main components:
 
@@ -143,13 +225,13 @@ The CNN model consists of the following main components:
     - A dropout layer with a rate of 0.5 follows, ensuring regularization to prevent overfitting.
     - The final dense layer has `N_TYPES` neurons with a softmax activation function, providing probability-based outputs for each of the four classes (Glioma, Meningioma, Pituitary, and No Tumor).
 
-#### Compilation
+### Compilation
 
 - **Optimizer:** The Adam optimizer is used with a learning rate of 0.001. This choice balances convergence speed with stability, which is essential in training deeper networks.
 - **Loss Function:** Categorical cross-entropy is used as the loss function since it is suitable for multi-class classification tasks.
 - **Metrics:** Accuracy is chosen as the primary metric to monitor model performance during training.
 
-#### Callbacks and Training Process
+### Callbacks and Training Process
 
 To enhance training effectiveness and prevent overfitting:
 - **Early Stopping:** This callback monitors validation loss and stops training if it doesn't improve for a specified patience period, thus saving the best weights.
@@ -167,7 +249,7 @@ Training is conducted with an increased `steps_per_epoch`, repeating the dataset
 
 ---
 
-### Model Development Overview: Version 2 - Transfer Learning with VGG16
+### Model Development Overview: Version 2 Transfer Learning with VGG16
 
 For the second iteration of the brain tumor classification model, transfer learning is employed with the VGG16 architecture as a base. This approach leverages pre-trained weights on ImageNet, enabling the model to benefit from feature extraction on a large, diverse dataset, which aids in handling smaller, domain-specific datasets like MRI brain scans. The model is designed for multi-class classification across four classes: *Glioma*, *Meningioma*, *Pituitary tumors*, and *No Tumor*.
 
@@ -208,11 +290,11 @@ The model is trained over 20 epochs with the training and validation datasets, s
 
 ---
 
-### Model Development Overview: Version 3 - Fine-Tuned Transfer Learning with VGG16
+### Model Development Overview: Version 3 Fine-Tuned Transfer Learning with VGG16
 
 In this third version, transfer learning is extended with fine-tuning, building upon the initial VGG16 model while retraining the later layers for enhanced specialization on MRI brain scans. This approach aims to improve classification by focusing the model’s attention on domain-specific features within the brain tumor dataset.
 
-#### Model Architecture
+### Model Architecture
 
 The model architecture includes:
 
@@ -225,13 +307,13 @@ The model architecture includes:
   - A dense layer with 128 neurons and ReLU activation is added to capture complex patterns. A dropout layer with a 0.5 dropout rate follows, improving generalization by randomly setting half of the neurons to zero during training.
   - The final dense layer contains `N_TYPES` neurons with a softmax activation function, providing a probability distribution across the four classes.
 
-#### Compilation
+### Compilation
 
 - **Optimizer:** The RMSprop optimizer with a learning rate of \(1 \times 10^{-5}\), chosen to fine-tune parameters slowly and avoid disruptive weight updates.
 - **Loss Function:** Categorical cross-entropy, appropriate for multi-class classification tasks.
 - **Metrics:** Accuracy is used to monitor performance.
 
-#### Callbacks and Training Process
+### Callbacks and Training Process
 
 To avoid overfitting and improve model stability:
 - **Early Stopping:** Terminates training if the validation loss doesn’t improve within five epochs, retaining the best-performing weights.
@@ -261,20 +343,22 @@ Ultimately, the first model (Version 1) proved to be the most effective. After s
 
 **This approach confirmed that, despite lower initial accuracy, the simpler custom CNN with focused adjustments provided the best performance for reliable brain tumor classification.**
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
 ## Dashboard Design Overview
 
 The project is delivered through a user-friendly Streamlit dashboard, comprising five interactive pages that guide the client through the main features and insights generated by the model. The pages are accessible through a sidebar menu for easy navigation.
 
-1. **Quick Project Summary**
+1. ### Quick Project Summary
    - The homepage provides a concise overview of the project, outlining the business context, objectives, and motivations for building the brain tumor classification tool. This page also includes links to supplementary documentation for clients seeking in-depth information.
    <details>
    <summary>See Image</summary>
    <img src="assets/page-summary.png">
    </details>
 
-2. **MRI Visualizer**
+2. ### MRI Visualizer
    - This page addresses the **first business objective**—Data Analysis—by enabling visual exploration of MRI data. It includes interactive plots that can be toggled via a built-in toolbar, allowing users to examine data distributions and patterns in MRI scans.  
    - Additionally, the **image montage tool** lets users select specific labels (Glioma, Meningioma, Pituitary, and No Tumor) and view a montage of random MRI images from the validation set, making it easier to visualize and compare various brain conditions.
    <details>
@@ -282,7 +366,7 @@ The project is delivered through a user-friendly Streamlit dashboard, comprising
    <img src="assets/page-visualizer.png">
    </details>
 
-3. **Brain Tumor Detection**
+3. ### Brain Tumor Detection
    - Fulfilling the **second business objective**, this page offers a tool for detecting brain tumors in MRI images. Users can download MRI scans from the dataset, upload them to the dashboard, and receive class predictions (Glioma, Meningioma, Pituitary or No Tumor) generated by the model.
    - Outputs include a **categorical class prediction** with a percentage-based graphical representation, as well as the option to **download predictions** as a CSV file.
    <details>
@@ -291,14 +375,14 @@ The project is delivered through a user-friendly Streamlit dashboard, comprising
    <img src="assets/page-detector1.png">
    </details>
 
-4. **Project Hypothesis**
+4. ### Project Hypothesis
    - This page provides documentation of the project’s hypotheses, followed by an analysis of findings in relation to those hypotheses. It aligns with the data presented in the documentation and serves to explain the theoretical basis for the model's development and its potential use cases in medical imaging.
    <details>
    <summary>See Image</summary>
    <img src="assets/page-hypothesis.png">
    </details>
 
-5. **ML Performance Metrics**
+5. ### ML Performance Metrics
    - This final page documents dataset characteristics, including size and label distributions, highlighting any target imbalances. 
    - The model’s **training history** is displayed through epoch-wise graphs of validation loss and accuracy, illustrating model progress over time. A **confusion matrix** further visualizes classification accuracy, showing how well the model performs on each class.
    - The model structure.
@@ -309,10 +393,62 @@ The project is delivered through a user-friendly Streamlit dashboard, comprising
 
 This structured and intuitive dashboard ensures that clients can easily explore data, interact with model predictions, and access all relevant insights related to the project’s goals.
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
-## Unfixed Bugs
+## Bugs and Issues
+
+### Unfixed Bugs
 There is no known unfixed bugs in the project.
+
+
+### Issues
+To optimize deployment on Heroku and have an app with updated version all packages and dependencies, I created a custom template to the project's requirements. During development, I had installed several packages, but when deploying, I faced an issue with Heroku’s 500 MB slug size limit.
+
+To address this:
+
+1. I used a `Pipfile` to list only the essential packages, removing any unnecessary dependencies that were added during development.
+2. I locked these required dependencies to specific versions suitable for production.
+3. To further reduce the slug size, I added any large, non-essential files to a `.slugignore` file to exclude them from deployment.
+
+This approach minimized the app's size, enabling a successful Heroku deployment.
+
+[Back to top ⇧](#table-of-contents)
+
+---
+
+### Testing
+
+| Test Case                         | Expected Result                                                                                | Test Result |
+|-----------------------------------|-----------------------------------------------------------------------------------------------|-------------|
+| **Homepage (Summary page)**       |                                                                                               |             |
+| Open the Homepage                 | Homepage loads with the correct template and data                                              | ✅ PASS      |
+| Navigation bar                    | By selecting menu option from side bar it opens the correct page                               | ✅ PASS      |
+| Open the Homepage                           | Homepage loads with the correct template, displaying an overview of the project                           | ✅ PASS      |
+| Links to supplementary documents (dataset)           | Links to the Kaggle dataset is clickable and redirect to the correct resources                                | ✅ PASS      |
+| **MRI Visualizer Page**          |                                                                                               |             |
+| Open MRI Visualizer page                                | Page loads with the correct template and data for plots                        | ✅ PASS      |
+| Select "Difference between Average and Variability"     | Checkbox selection the visualization to show differences between average and variability images for each tumor type | ✅ PASS      |
+| Select "Difference between No Tumor and Each Tumor Type" | Checkbox selection visualization to display differences between No Tumor and each tumor type | ✅ PASS      |
+| Select "Image Montage"                                  | Checkbox selection displays image montage options                                                   | ✅ PASS      |
+| Select specific label from dropdown menu for Image Montage                 | Image montage displays a grid of MRI images for the chosen label (Glioma, Meningioma, Pituitary, No Tumor) | ✅ PASS      |
+| View differences between tumor types                    | Users can visually observe intensity or texture variations between each tumor type and No Tumor class | ✅ PASS      |
+| **Brain Tumor Detection Page**          |                                                                                               |             |
+| Open Brain Tumor Detection page                      | Page loads with correct template, including options to upload MRI scans and view predictions                       | ✅ PASS      |
+| Upload single MRI scan (jpg, jpeg, png) images       | MRI scan uploads successfully, and class prediction (Glioma, Meningioma, Pituitary, or No Tumor) is displayed      | ✅ PASS      |
+| Upload multiple MRI scans (jpg, jpeg, png) images    | Multiple MRI scans upload successfully, and class predictions are generated for each scan                          | ✅ PASS      |
+| View prediction output                               | Class prediction is displayed with a graphical representation showing prediction percentages for each category     | ✅ PASS      |
+| Download predictions as CSV                          | Predictions for all uploaded scans are saved in a downloadable CSV file, with timestamp and class labels           | ✅ PASS      |
+| **Hypotheses and Analysis Page**          |                                                                                               |             |
+| Open the Hypotheses and Analysis Page       | Page loads with correct template, displaying project hypotheses and analysis of findings                  | ✅ PASS      |
+| Display of Hypotheses                       | Hypotheses are clearly presented, providing context for the model's development                           | ✅ PASS      |
+| **ML Performance Metrics Page**          |                                                                                               |             |
+| Open the ML Performance Metrics Page            | Page loads with correct template, displaying dataset characteristics, training history, confusion matrix, and model structure | ✅ PASS      |
+| Responsive design                                       | Layout adjusts properly without overlap or misalignment across different screen sizes                | ✅ PASS      |
+| Links                                       | All the links are working properly and redirect to the correct source.                | ✅ PASS      |
+
+[Back to top ⇧](#table-of-contents)
 
 ---
 
@@ -359,6 +495,8 @@ The brain tumor detector app was deployed on Heroku from GitHub, following these
 
 The app is now accessible at: [https://braintumor-detector-c253a26b71a2.herokuapp.com/](https://braintumor-detector-c253a26b71a2.herokuapp.com/)
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
 ## Forking the Repository
@@ -390,6 +528,8 @@ The app is now accessible at: [https://braintumor-detector-c253a26b71a2.herokuap
 
 You now have a local copy of the repository!
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
 ## Data Analysis and Machine Learning Libraries
@@ -417,6 +557,8 @@ Here’s a refined version with a bit more clarity and consistency in style:
 
 The `[requires]` section specifies that the project requires **Python 3.12**, ensuring compatibility and consistency in the development environment. The `Pipfile.lock` file will further secure exact version specifications, helping avoid conflicts and maintaining a stable environment.
 
+[Back to top ⇧](#table-of-contents)
+
 ---
 
 ## Credits
@@ -432,5 +574,7 @@ In addition, [Stack Overflow](https://stackoverflow.com/) the key resource for r
 I extend my deepest gratitude to my mentor, Mo Shami, for his invaluable guidance and insightful suggestions throughout this project. His expertise and support have been instrumental in shaping its direction and achieving successful outcomes.
 
 A special thanks to the Code Institute for providing the foundational resources, support, and inspiration that made this project possible. 
+
+[Back to top ⇧](#table-of-contents)
 
 
