@@ -9,10 +9,10 @@ from src.data_management import load_pkl_file
 # Define the class labels
 target_map = {0: 'glioma', 1: 'meningioma', 2: 'notumor', 3: 'pituitary'}
 
+
 def plot_predictions_probabilities(pred_proba, pred_class):
     """
     Plot prediction probability results for each class.
-    
     Parameters:
     - pred_proba: Prediction probabilities for each class
     """
@@ -53,26 +53,24 @@ def resize_input_image(img, version):
     return my_image
 
 
-
 def load_model_and_predict(my_image, version):
     """
-    Load the model and perform a prediction on the input image.
-    
+    Load the model and perform a prediction on the input image.    
     Parameters:
     - my_image: Preprocessed image for prediction
     - version: Model version to load
-    
     Returns:
     - pred_proba: Array of probabilities for each class
     - pred_class: Predicted class label
     """
-    
-    # Load the model
-    model = keras.models.load_model(f"outputs/{version}/brain_tumor_detector.h5")
 
+    # Load the model
+    model = keras.models.load_model(
+        f"outputs/{version}/brain_tumor_detector.h5")
 
     # Predict probabilities for each class
-    pred_proba = model.predict(my_image)[0]  # Model outputs an array of probabilities
+    # Model outputs an array of probabilities
+    pred_proba = model.predict(my_image)[0]
     pred_class_idx = np.argmax(pred_proba)  # Get index of highest probability
     pred_class = target_map[pred_class_idx]  # Map to class name
 

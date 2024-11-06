@@ -12,7 +12,6 @@ import random
 def page_brain_tumor_visualizer_body():
     """
     Renders the Brain Tumor Visualizer page in the Streamlit app.
-    
     This function includes options for:
     - Displaying average and variability images for each tumor type.
     - Comparing 'No Tumor' images against each tumor type.
@@ -23,59 +22,79 @@ def page_brain_tumor_visualizer_body():
         f"* The client is interested in having a study that visually "
         f"differentiates among different types of brain tumors."
     )
-    
+
     version = 'v1'
-    if st.checkbox("Difference between average and variability image for each tumor type"):
-      
+    if st.checkbox(
+        "Difference between average and variability image for "
+        "each tumor type"
+    ):
+
         avg_glioma = plt.imread(f"outputs/{version}/avg_var_glioma.png")
-        avg_meningioma = plt.imread(f"outputs/{version}/avg_var_meningioma.png")
+        avg_meningioma = plt.imread(
+            f"outputs/{version}/avg_var_meningioma.png")
         avg_pituitary = plt.imread(f"outputs/{version}/avg_var_pituitary.png")
         avg_no_tumor = plt.imread(f"outputs/{version}/avg_var_notumor.png")
 
         st.warning(
             f"* The average and variability images show subtle patterns "
-            f"that may assist in differentiating tumor types. Some color and texture "
-            f"variations are visible across categories."
+            f"that may assist in differentiating tumor types. Some color "
+            f"and texture variations are visible across categories."
         )
 
         st.image(avg_glioma, caption='Glioma - Average and Variability')
-        st.image(avg_meningioma, caption='Meningioma - Average and Variability')
+        st.image(
+            avg_meningioma, caption='Meningioma - Average and Variability')
         st.image(avg_pituitary, caption='Pituitary - Average and Variability')
         st.image(avg_no_tumor, caption='No Tumor - Average and Variability')
         st.write("---")
 
-    if st.checkbox("Differences between 'No Tumor' and each tumor type"):
-      # Load each comparison image
-      diff_notumor_vs_glioma = plt.imread(f"outputs/{version}/avg_diff_notumor_vs_glioma.png")
-      diff_notumor_vs_meningioma = plt.imread(f"outputs/{version}/avg_diff_notumor_vs_meningioma.png")
-      diff_notumor_vs_pituitary = plt.imread(f"outputs/{version}/avg_diff_notumor_vs_pituitary.png")
+    if st.checkbox(
+        "Differences between 'No Tumor' and each tumor type"
+    ):
+        # Load each comparison image
+        diff_notumor_vs_glioma = plt.imread(
+          f"outputs/{version}/avg_diff_notumor_vs_glioma.png"
+          )
+        diff_notumor_vs_meningioma = plt.imread(
+          f"outputs/{version}/avg_diff_notumor_vs_meningioma.png")
+        diff_notumor_vs_pituitary = plt.imread(
+          f"outputs/{version}/avg_diff_notumor_vs_pituitary.png"
+        )
 
-      # Display each comparison image with a caption
-      st.warning(
-          f"* The images below highlight differences between the 'No Tumor' average image "
-          f"and each specific tumor type (Glioma, Meningioma, and Pituitary). Some texture "
-          f"or intensity variations might be observed between the categories."
-      )
-      
-      st.image(diff_notumor_vs_glioma, caption="Difference between 'No Tumor' and 'Glioma'")
-      st.image(diff_notumor_vs_meningioma, caption="Difference between 'No Tumor' and 'Meningioma'")
-      st.image(diff_notumor_vs_pituitary, caption="Difference between 'No Tumor' and 'Pituitary'")
+        # Display each comparison image with a caption
+        st.warning(
+              f"* The images below highlight differences between the 'No "
+              f"Tumor' average image and each specific tumor type (Glioma, "
+              f"Meningioma, and Pituitary). Some texture or intensity "
+              f"variations might be observed between the categories."
+        )
 
+        st.image(diff_notumor_vs_glioma, caption="Difference between "
+                 "'No Tumor' and 'Glioma'")
+        st.image(diff_notumor_vs_meningioma, caption="Difference between "
+                 "'No Tumor' and 'Meningioma'")
+        st.image(diff_notumor_vs_pituitary, caption="Difference between "
+                 "'No Tumor' and 'Pituitary'")
 
-    if st.checkbox("Image Montage"): 
-        st.write("* To refresh the montage, click on the 'Create Montage' button")
+    if st.checkbox("Image Montage"):
+        st.write("* To refresh the montage, click on the 'Create "
+                 "Montage' button")
         my_data_dir = 'inputs/brain-tumor-mri-dataset/mri-images'
         labels = os.listdir(my_data_dir + '/validation')
-        label_to_display = st.selectbox(label="Select label", options=labels, index=0)
-        
-        if st.button("Create Montage"):      
-            image_montage(dir_path=my_data_dir + '/validation',
-                          label_to_display=label_to_display,
-                          nrows=8, ncols=3, figsize=(10, 25))
+        label_to_display = st.selectbox(
+            label="Select label", options=labels, index=0
+        )
+
+        if st.button("Create Montage"):
+            image_montage(
+                dir_path=my_data_dir + '/validation',
+                label_to_display=label_to_display,
+                nrows=8, ncols=3, figsize=(10, 25)
+            )
         st.write("---")
 
 
-def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
+def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15, 10)):
     """
     Creates an image montage for the specified label from the directory.
 
@@ -114,10 +133,11 @@ def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
             img = imread(f"{dir_path}/{label_to_display}/{img_idx[idx]}")
             img_shape = img.shape
             axes[ax_idx[0], ax_idx[1]].imshow(img)
-            axes[ax_idx[0], ax_idx[1]].set_title(f"Width {img_shape[1]}px x Height {img_shape[0]}px")
+            axes[ax_idx[0], ax_idx[1]].set_title(
+                f"Width {img_shape[1]}px x Height {img_shape[0]}px"
+            )
             axes[ax_idx[0], ax_idx[1]].set_xticks([])
             axes[ax_idx[0], ax_idx[1]].set_yticks([])
-        
         plt.tight_layout()
         st.pyplot(fig=fig)
 
